@@ -13,10 +13,10 @@ const Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
   const data = { name: 'Test Person', age: 28, favoriteFoods: ['apple'] };
-  const newPerson = new Person();
+  const newPerson = new Person(data);
   newPerson.save(function(error){
     if(error){
-      throw new Error(error);
+      return done(error);
     }
     done(null, data);
   });
@@ -25,7 +25,7 @@ const createAndSavePerson = (done) => {
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create(arrayOfPeople, (error, data) => {
     if(error) {
-      throw new Error(error);
+      return done(error);
     };
     done(null, arrayOfPeople);
   });
