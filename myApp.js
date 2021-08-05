@@ -22,13 +22,12 @@ const createAndSavePerson = (done) => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  /*Person.create(arrayOfPeople, (error, data) => {
+  Person.create(arrayOfPeople, (error, data) => {
     if(error) {
       return console.error(error);
     };
     done(null, arrayOfPeople);
-  });*/
-  done(null /*, data*/);
+  });
 };
 
 const findPeopleByName = (personName, done) => {
