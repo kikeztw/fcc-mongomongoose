@@ -3,6 +3,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+const handler = (done) => (error, data) => {
+  if(error) {
+    return console.error(error);
+  };
+  done(null, data);
+};
+
 const personSchema = new Schema({
   name: {type: String, required: true},
   age: Number,
@@ -13,25 +20,15 @@ const Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
   const newPerson = new Person({name: "Jane Fonda", age: 84, favoriteFoods: ["eggs", "fish", "fresh fruit"]});
-  newPerson.save(function(error, data){
-    if(error){
-      return console.error(error);
-    }
-    done(null, data);
-  });
+  newPerson.save(handler(done));
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create(arrayOfPeople, (error, data) => {
-    if(error) {
-      return console.error(error);
-    };
-    done(null, arrayOfPeople);
-  });
+  Person.create(arrayOfPeople, handler(done));
 };
 
-const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+const findPeopleByName = async (personName, done) => {
+  Person.find({ name: personName }, handler(done))
 };
 
 const findOneByFood = (food, done) => {
