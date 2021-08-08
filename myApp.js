@@ -31,8 +31,8 @@ const findPeopleByName = async (personName, done) => {
   Person.find({ name: personName }, handler(done))
 };
 
-const findOneByFood = (food, done) => {
-  Person.findOne(food, handler(done));
+const findOneByFood = (favoriteFoods, done) => {
+  Person.findOne({ favoriteFoods }, handler(done));
 };
 
 const findPersonById = (personId, done) => {
