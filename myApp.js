@@ -33,12 +33,10 @@ const findPeopleByName = async (personName, done) => {
 
 const findOneByFood = (food, done) => {
   Person.findOne(food, handler(done));
-  done(null /*, data*/);
 };
 
 const findPersonById = (personId, done) => {
-  // Person.findById(personId, handler(done));
-  done(null /*, data*/);
+  Person.findById(personId, handler(done));
 };
 
 const findEditThenSave = (personId, done) => {
