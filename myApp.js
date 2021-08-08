@@ -41,18 +41,20 @@ const findPersonById = (personId, done) => {
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (error, person) => {
+      if(error) return console.error(error);
+      person.favoriteFoods.push(foodToAdd);
+      person.save(handler(done))
+  })
 };
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  Person.findAndUpdate({ name: personName }, { age: ageToSet }, { new: true}, handler(done))
 };
 
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndRemove(personId, handler(done))
 };
 
 const removeManyPeople = (done) => {
