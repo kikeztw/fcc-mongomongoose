@@ -37,7 +37,7 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
-  Person.findById(personId, handler(done));
+  // Person.findById(personId, handler(done));
   done(null /*, data*/);
 };
 
